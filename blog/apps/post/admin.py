@@ -1,3 +1,27 @@
 from django.contrib import admin
+from .models import *
 
 # Register your models here.
+
+class CategoriaAdmin(admin.ModelAdmin):
+    ordering = ('id', 'nombre', 'activado', 'fecha_creacion')
+    search_fields = ('id', 'nombre', 'activado', 'fecha_creacion')
+    list_display = ('id', 'nombre', 'activado', 'fecha_creacion')
+    list_filter = ('activado',)
+  
+
+class PostAdmin(admin.ModelAdmin):
+    ordering = ('id', 'titulo', 'resumen', 'texto', 'imagen', 'categoria', 'publicado', 'fecha_creacion', 'usuario')
+    search_fields = ('id', 'titulo', 'resumen', 'texto', 'imagen', 'categoria__nombre', 'publicado', 'fecha_creacion')
+    list_display = ('titulo', 'resumen','imagen', 'categoria', 'publicado', 'fecha_creacion', 'usuario')
+    list_filter = ('categoria__nombre', 'publicado')
+
+class ComentarioAdmin(admin.ModelAdmin):
+    ordering = ('usuario', 'texto', 'posteo', 'fecha')
+    search_fields = ('usuario__nombre', 'texto', 'posteo', 'fecha')
+    list_display = ('usuario', 'texto', 'posteo', 'fecha')
+
+admin.site.register(Categoria, CategoriaAdmin)
+admin.site.register(Post, PostAdmin)
+admin.site.register(Comentario, ComentarioAdmin)
+

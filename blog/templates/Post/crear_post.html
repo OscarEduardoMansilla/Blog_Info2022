@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card">
+            <h5 class="card-header">Posteo</h5>
+            <div class="card-body">
+                {{post_form.as_p}}
+                <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                <a href="{% url 'crear_post' %}" class="btn btn-danger">Cancelar</a>
+            </div>
+                
+            
+        </div>
+
+    </form>
+  
+    
+</div>
+        
+{% endblock body%}
